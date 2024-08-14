@@ -3,15 +3,18 @@ Description: Frequency Domain Model Augmentation for Adversarial Attack
 https://arxiv.org/abs/2207.05382
 
 '''
-from rsiattack import ATTACK
+import time
+
+import numpy as np
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
+from torch.autograd import Variable as V
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-from torch.autograd import Variable as V
-import torch.nn.functional as F
-import numpy as np
-import time
+
+from rsiattack import ATTACK
+
 
 def dct_2d(x, norm=None):
     """

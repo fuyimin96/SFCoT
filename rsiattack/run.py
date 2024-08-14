@@ -1,5 +1,6 @@
-import rsiattack
 import argparse
+
+import rsiattack
 
 attacks_box = {
     'admix'     :   rsiattack.ADMIX,

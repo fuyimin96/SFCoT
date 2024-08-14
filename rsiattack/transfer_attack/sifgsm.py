@@ -2,12 +2,16 @@
 Description: Nesterov Accelerated Gradient and Scale Invariance for Adversarial Attacks
 https://arxiv.org/abs/1908.06281
 '''
-from rsiattack import ATTACK
+import time
+
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-import time
+
+from rsiattack import ATTACK
+
+
 class SI_FGSM(ATTACK):
     def __init__(self, parser):
         self.loss = nn.CrossEntropyLoss()

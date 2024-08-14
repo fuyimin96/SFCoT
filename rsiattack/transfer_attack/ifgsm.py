@@ -1,8 +1,10 @@
-from rsiattack import ATTACK
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+
+from rsiattack import ATTACK
+
 
 class I_FGSM(ATTACK):
     def __init__(self, parser):

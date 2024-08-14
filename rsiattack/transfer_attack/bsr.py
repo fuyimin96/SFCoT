@@ -2,15 +2,18 @@
 Description: Boosting adversarial transferability by block shuffle and rotation
 https://arxiv.org/abs/2308.10299
 '''
-from rsiattack import ATTACK
+import random
+import time
+
+import numpy as np
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-import torch.nn.functional as F
-import random
-import numpy as np
-import time
+
+from rsiattack import ATTACK
+
 
 class BSR(ATTACK):
     def __init__(self, parser):

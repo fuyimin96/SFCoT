@@ -2,12 +2,15 @@
 Description: Admix: Enhancing the Transferability of Adversarial Attacks
 https://arxiv.org/abs/2102.00436
 '''
-from rsiattack import ATTACK
+import time
+
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-import time
+
+from rsiattack import ATTACK
+
 
 class ADMIX(ATTACK):
     def __init__(self, parser):
