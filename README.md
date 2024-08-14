@@ -48,7 +48,7 @@ python main.py \
   --rholl [rholl] --wave [wave]
 ```
 The script also supports the following options:
-- `--data_type`:  The dataset used against the attack (default: "MTSRSI")
+- `--data_type`:  The dataset used against the attack (default: "MTARSI")
 - `--model_type`: Backbone as a white-box model (default: "resnet34")
 - `--batch_size`: Batch size run no effect on results
 - `--alpha`:  The step size of the iteration during the attack
