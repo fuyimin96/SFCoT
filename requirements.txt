@@ -1,0 +1,7 @@
+tqdm==4.66.2
+pillow
+torch
+pandas
+numpy
+torchvision
+torch-dct
