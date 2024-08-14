@@ -23,7 +23,7 @@ pip install -r requirements.txt
 To run the code with CUDA properly, you can comment out `torch` and `torchvision` in `requirement.txt`, and install the appropriate version of `torch` and `torchvision` according to the instructions on [PyTorch](https://pytorch.org/get-started/locally/).
 
 ## Datasets
-For the dataset used in this paper, please download the following datasets MTARSI [source](https://www.kaggle.com/datasets/aqibriaz/mtarsidataset) and FGSCR42 [source](https://github.com/DYH666/FGSCR-42) to ```./dataset```.
+For the dataset used in this paper, please download the following datasets [MTARSI](https://www.kaggle.com/datasets/aqibriaz/mtarsidataset) / [FGSCR42](https://github.com/DYH666/FGSCR-42) and move them to ```./dataset```.
 
 ## Run the code
 You can also run the code with the following command:
