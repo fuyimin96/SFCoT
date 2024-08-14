@@ -91,10 +91,10 @@ We visualize for attention shift of the target model as below.
 If you find our work and this repository useful. Please consider giving a star :star: and citation.
 ```bibtex
 @article{SFCoT,
-	title={Transferable Adversarial Attacks for Remote Sensing Object Recognition via Spatial-Frequency Co-Transformation}, 
-	author={Fu, Yimin and Liu, Zhunga and Lyu, Jialin},
-	journal={IEEE Transactions on Geoscience and Remote Sensing},
-	year={2024},
-  doi={10.1109/TGRS.2024.3443403}
+        title={Transferable Adversarial Attacks for Remote Sensing Object Recognition via Spatial-Frequency   Co-Transformation}, 
+        author={Fu, Yimin and Liu, Zhunga and Lyu, Jialin},
+        journal={IEEE Transactions on Geoscience and Remote Sensing},
+        year={2024},
+        doi={10.1109/TGRS.2024.3443403}
 }
 ```
