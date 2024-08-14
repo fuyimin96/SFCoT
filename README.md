@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">SFCoT : Transferable Adversarial Attacks for Remote Sensing Object Recognition via Spatial-Frequency Co-Transformation (TGRS'24)</h1>
+  <h1 align="center">SFCoT: Transferable Adversarial Attacks for Remote Sensing Object Recognition via Spatial-Frequency Co-Transformation (TGRS'24)</h1>
   <p align="center">
     <a href="https://github.com/fuyimin96"><strong>Yimin Fu</strong></a>
     &nbsp;&nbsp;
@@ -23,7 +23,7 @@ pip install -r requirements.txt
 To run the code with CUDA properly, you can comment out `torch` and `torchvision` in `requirement.txt`, and install the appropriate version of `torch` and `torchvision` according to the instructions on [PyTorch](https://pytorch.org/get-started/locally/).
 
 ## Datasets
-For Tiny-ImageNet, please download the following datasets to ```./dataset```.
+For the dataset used in this paper, please download the following datasets to ```./dataset```.
 
 You can download both datasets from the links below:
 
