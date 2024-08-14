@@ -1,10 +1,10 @@
 dataset/FGSCR_42/*
-!dataset/FGSCR_42/.gitkeep
+!dataset/FGSCR_42
 dataset/MTARSI/*
-!dataset/MTARSI/.gitkeep
+!dataset/MTARSI
 checkpoints/*
-!checkpoints/.gitkeep
+!checkpoints
 examples/*
-!examples/.gitkeep
+!examples
 logs/*
 __pycache__/
