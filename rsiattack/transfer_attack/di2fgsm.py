@@ -2,12 +2,14 @@
 Description: Improving Transferability of Adversarial Examples with Input Diversity
 http://arxiv.org/abs/1803.06978
 '''
-from rsiattack import ATTACK
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-import torch.nn.functional as F
+
+from rsiattack import ATTACK
+
 
 class DI2_FGSM(ATTACK):
     def __init__(self, parser):

@@ -2,12 +2,14 @@
 Description: Patch-wise Attack for Fooling Deep Neural Network
 http://arxiv.org/abs/2007.06765
 '''
-from rsiattack import ATTACK
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-import torch.nn.functional as F
+
+from rsiattack import ATTACK
+
 
 class PI_FGSM(ATTACK):
     def __init__(self, parser):

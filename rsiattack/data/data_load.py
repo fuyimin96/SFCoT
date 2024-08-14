@@ -1,15 +1,18 @@
-import torchvision.transforms as transforms
+import glob
 import os
-from torchvision.datasets import ImageFolder
+
 import pandas as pd
 import PIL
-from torch.utils import data
 import torch
-import glob
-from torch.utils.data import DataLoader
-from tqdm import tqdm
 import torch.nn.functional as F
+import torchvision.transforms as transforms
+from torch.utils import data
+from torch.utils.data import DataLoader
+from torchvision.datasets import ImageFolder
+from tqdm import tqdm
+
 from ..model import func
+
 model_box = func.models_mapping
 
 label_MTARSI = {'A-10': 0, 'A-26': 1, 

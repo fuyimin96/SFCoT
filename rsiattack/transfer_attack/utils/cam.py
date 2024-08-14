@@ -1,9 +1,10 @@
 import numpy as np
-from PIL import Image
 import torch
+import torchvision.transforms.functional as TF
+from PIL import Image
 from torch import nn
 from torchvision import transforms
-import torchvision.transforms.functional as TF
+
 
 class Flatten(nn.Module):
     """One layer module that flattens its input."""

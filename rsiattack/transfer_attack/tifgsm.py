@@ -2,15 +2,18 @@
 Description: Evading Defenses to Transferable Adversarial Examples by Translation-Invariant Attacks
 https://arxiv.org/abs/1904.02884
 '''
-from rsiattack import ATTACK
+import warnings
+
+import numpy as np
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
+from scipy import stats as st
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-import torch.nn.functional as F
-import warnings
-import numpy as np
-from scipy import stats as st
+
+from rsiattack import ATTACK
+
 
 class TI_FGSM(ATTACK):
     def __init__(self, parser):

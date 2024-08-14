@@ -1,6 +1,8 @@
-import torchvision.models as models
-import torch
 import os
+
+import torch
+import torchvision.models as models
+
 
 def vgg16(num):
     net = models.vgg16(weights='IMAGENET1K_V1')

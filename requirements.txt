@@ -5,3 +5,5 @@ pandas
 numpy
 torchvision
 torch-dct
+pytorch_wavelets
+PyWavelets

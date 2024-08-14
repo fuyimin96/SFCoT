@@ -2,11 +2,13 @@
 Description: Towards Deep Learning Models Resistant to Adversarial Attacks
 https://arxiv.org/abs/1706.06083
 '''
-from rsiattack import ATTACK
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+
+from rsiattack import ATTACK
+
 
 class PGD(ATTACK):
     def __init__(self, parser):

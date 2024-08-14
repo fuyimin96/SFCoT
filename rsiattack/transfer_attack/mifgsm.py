@@ -2,11 +2,13 @@
 Description: Boosting Adversarial Attacks with Momentum
 http://arxiv.org/abs/1710.06081
 '''
-from rsiattack import ATTACK
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+
+from rsiattack import ATTACK
+
 
 class MI_FGSM(ATTACK):
     def __init__(self, parser):
