@@ -95,6 +95,6 @@ If you find our work and this repository useful. Please consider giving a star :
 	author={Fu, Yimin and Liu, Zhunga and Lyu, Jialin},
 	journal={IEEE Transactions on Geoscience and Remote Sensing},
 	year={2024},
-doi={10.1109/TGRS.2024.3443403}
+  doi={10.1109/TGRS.2024.3443403}
 }
 ```
