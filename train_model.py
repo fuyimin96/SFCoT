@@ -1,6 +1,7 @@
 """
 Description: pre-train model with RSI Dataset
 """
+
 import argparse
 import csv
 import datetime
@@ -18,11 +19,26 @@ from rsiattack.model import func
 
 
 def get_args_parser(add_help=True):
-    parser = argparse.ArgumentParser(description="training the models to attack", add_help=add_help)
-    parser.add_argument("--data_type", type=str, choices=["FGSCR_42", "MTARSI"], default="MTARSI", help="used trainset in training",)
-    parser.add_argument("--data_dir", type=str, default="./dataset", help="path of the dataset")
+    parser = argparse.ArgumentParser(
+        description="training the models to attack", add_help=add_help
+    )
+    parser.add_argument(
+        "--data_type",
+        type=str,
+        choices=["FGSCR_42", "MTARSI"],
+        default="MTARSI",
+        help="used trainset in training",
+    )
+    parser.add_argument(
+        "--data_dir", type=str, default="./dataset", help="path of the dataset"
+    )
     parser.add_argument("--log_path", type=str, default="logs/train_logs.csv")
-    parser.add_argument("--save_dir", type=str, default="./checkpoints", help="trained model where to save",)
+    parser.add_argument(
+        "--save_dir",
+        type=str,
+        default="./checkpoints",
+        help="trained model where to save",
+    )
     parser.add_argument("--lr", type=float, default=0.01)
     parser.add_argument("--epochs", type=int, default=100)
     parser.add_argument("--batch_size", type=int, default=18)
@@ -56,7 +72,7 @@ def train(args):
         scheduler = StepLR(optimizer, step_size=30, gamma=0.1)
         loss = torch.nn.CrossEntropyLoss()
         net = net.to(args.device)
-        print("** start training {}, Data is {} **".format(key, args.data_type))
+        print("** start training {key}, Data is {args.data_type} **")
         for _ in tqdm(range(args.epochs)):
             net.train()
             for data, gt in train_loader:
@@ -115,8 +131,8 @@ def train(args):
                 key,
                 args.data_type,
                 dtime,
-                "{:.4f}".format(train_acc * 100),
-                "{:.4f}".format(test_acc * 100),
+                f"{train_acc * 100:.4f}",
+                f"{test_acc * 100:.4f}",
                 save_path,
                 str(args.backbone),
             ]
@@ -126,10 +142,8 @@ def train(args):
 
             torch.save(net.state_dict(), save_path)
         print(
-            "training result is trainacc = {:04f}% , \
-              testacc = {:04f}%".format(
-                train_acc * 100, test_acc * 100
-            )
+            f"training result is trainacc = {train_acc * 100:04f}%"
+            f"testacc = {test_acc * 100:04f}%"
         )
     print("__finish training__")
 

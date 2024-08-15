@@ -1,4 +1,4 @@
-import rsiattack
+from rsiattack.run import rsi_runner
 
-if __name__ == '__main__':
-    attack = rsiattack.run()
+if __name__ == "__main__":
+    rsi_runner()

@@ -8,69 +8,81 @@ import torch
 import torchvision.transforms.functional as TF
 from torch.utils.data import DataLoader
 
-sys.path.append('model')
-sys.path.append('.')
 from .data.data_load import attackDataset, evalDataset
 from .model.func import models_mapping
+
+# sys.path.append("model")
+# sys.path.append(".")
+
 
 
 class ATTACK(object):
     def __init__(self, args):
-        if args.data_type == 'FGSCR_42':
+        if args.data_type == "FGSCR_42":
             args.num_classes = 42
-        elif args.data_type == 'MTARSI': 
+        elif args.data_type == "MTARSI":
             args.num_classes = 20
 
-        if not os.path.exists('./logs/eval_logs'):
-            os.makedirs('./logs/eval_logs')
+        if not os.path.exists("./logs/eval_logs"):
+            os.makedirs("./logs/eval_logs")
 
         self.white_model_type = args.model_type
         fc = models_mapping[args.model_type]
-        model_name = self.args.model_type + '_' + self.args.data_type  + '.pt'
+        model_name = self.args.model_type + "_" + self.args.data_type + ".pt"
         model_path = os.path.join(self.args.mod_dir, model_name)
-        model_dict = torch.load(model_path, map_location='cpu')
+        model_dict = torch.load(model_path, map_location="cpu")
         self.net = fc(self.args.num_classes)
         self.net.load_state_dict(model_dict)
         self.net.eval()
-        
+
         self.check_save_dir()
         self.dataset = attackDataset(args)
         self.label_dict = self.dataset.label_dict
         self.name_dict = self.dataset.name_dict
 
     def create_options(self, parser):
-        parser.add_argument('--data_type', type=str, default='MTARSI',
-                            help='used trainset in training')
-        parser.add_argument('--model_type', type=str, default='resnet34',
-                            help='used trainset in training')
-        parser.add_argument('--data_dir', type=str, default='./dataset',
-                            help='path of the dataset')
-        parser.add_argument('--img_save_dir', type=str, default='./examples')
-        parser.add_argument('--mod_dir', type=str, default='./checkpoints',
-                            help='trained model where to save')
-        parser.add_argument('--batch_size', type=int, default=18)
-        parser.add_argument('--device', type=str, default='cuda:0')
+        parser.add_argument(
+            "--data_type", type=str, default="MTARSI", help="used trainset in training"
+        )
+        parser.add_argument(
+            "--model_type",
+            type=str,
+            default="resnet34",
+            help="used trainset in training",
+        )
+        parser.add_argument(
+            "--data_dir", type=str, default="./dataset", help="path of the dataset"
+        )
+        parser.add_argument("--img_save_dir", type=str, default="./examples")
+        parser.add_argument(
+            "--mod_dir",
+            type=str,
+            default="./checkpoints",
+            help="trained model where to save",
+        )
+        parser.add_argument("--batch_size", type=int, default=18)
+        parser.add_argument("--device", type=str, default="cuda:0")
         return parser
-        
+
     def eval(self):
-        """Evaluate the adversarial images by calculating metrics 
+        """Evaluate the adversarial images by calculating metrics
             such as success rate and other relevant indicators.
 
         Args:
             adv_imag (_tensor_): The dataset of attacked images.
-        """        
+        """
         device = self.args.device
-        dataset = evalDataset(self.save_new_dir,self.args)
-        loader = DataLoader(dataset, batch_size=self.args.batch_size,
-                              shuffle=False,num_workers=5)
+        dataset = evalDataset(self.save_new_dir, self.args)
+        loader = DataLoader(
+            dataset, batch_size=self.args.batch_size, shuffle=False, num_workers=5
+        )
 
-        df = pd.DataFrame(columns = ['fr', 'm2c', 'c2m'])
-
+        df = pd.DataFrame(columns=["fr", "m2c", "c2m"])
 
         for key, fc in models_mapping.items():
-            model_name = key + '_' + self.args.data_type  + '.pt'
+            model_name = key + "_" + self.args.data_type + ".pt"
             model_path = os.path.join(self.args.mod_dir, model_name)
-            model_dict = torch.load(model_path, map_location='cpu')
+            model_dict = torch.load(model_path, map_location="cpu")
             net = fc(self.args.num_classes)
             net.load_state_dict(model_dict)
             net.eval()
@@ -84,42 +96,36 @@ class ATTACK(object):
                     pred_adv = torch.argmax(net(image_adv), 1)
                     all_sum += image_clean.shape[0]
                     fool_rate += (pred_clean != pred_adv).sum()
-                
+
                 fool_rate = fool_rate / all_sum
-            pd.options.display.float_format = '{:.4f}'.format
-            df.loc[key, 'fr'] = fool_rate.item() * 100
-            try:
-                print('spend time is {}'.format(self.spend_time))
-            except:
-                pass
-            print('** eval adv with model {} **'.format(key))
-            print('** dataset is {} **'.format(self.args.data_type))
-            print('fool rate = {:2f}'.format(fool_rate * 100))
-            print('** finish eval **')
+            pd.options.display.float_format = "{:.4f}".format
+            df.loc[key, "fr"] = fool_rate.item() * 100
+
+            print(f"** eval adv with model {key} **")
+            print(f"** dataset is {self.args.data_type} **")
+            print(f"fool rate = {fool_rate* 100:2f}")
+
+        print("** finish eval **")
         dtime = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
-        logs_name = 'logs/eval_logs/{}_{}_{}_{}.csv'.format(self.__class__.__name__, 
-                                                            self.args.data_type, 
-                                                            self.white_model_type,
-                                                            dtime)
-        with open(logs_name, 'a') as f:
+        logs_name = (
+            f"logs/eval_logs/{self.__class__.__name__}"
+            f"_{self.args.data_type}_{self.white_model_type}_{dtime}.csv"
+        )
+
+        with open(logs_name, "a", encoding="utf-8") as f:
             df.to_csv(f)
-            try:
-                f.write('spend time is {}'.format(self.spend_time))
-            except:
-                pass
             for args_key, args_value in vars(self.args).items():
-                f.write('{} : {}\n'.format(args_key, args_value))
+                f.write(f"{args_key} : {args_value}\n")
         return df
-    
+
     def check_save_dir(self):
         args = self.args
 
-        path_datatime = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime())
-        folder_name = '{}_{}_{}'.format(args.data_type, args.model_type,
-                                        args.att)
-        
+        path_datatime = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())
+        folder_name = f"{args.data_type}_{args.model_type}_{args.att}"
+
         save_dir = os.path.join(args.img_save_dir, folder_name, path_datatime)
-        
+
         os.makedirs(save_dir, exist_ok=True)
         self.save_new_dir = save_dir
 
