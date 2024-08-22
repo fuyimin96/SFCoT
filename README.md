@@ -44,7 +44,7 @@ python main.py \
   --alpha [alpha] --eps [alpha] --epochs [epochs]\
   --mu [mu] --num_blocks [num_blocks]\
   --num_copies [num_copies] --th [th]\
-  --move_max [move_max] --resize_max [resize_max]\
+  --resize_max [resize_max]\
   --rholl [rholl] --wave [wave]
 ```
 The script also supports the following options:
@@ -58,7 +58,6 @@ The script also supports the following options:
 - `--num_blocks`:  Number of chunks, e.g. 3 means 3*3 chunks.
 - `--num_copies`:  Number of replicated samples per iteration
 - `--th`:  Thresholds for CAM
-- `--move_max`:  Maximum pixel value of random moves
 - `--resize_max`:  Maximum percentage of random scaling
 - `--rholl`:  The Parameter of low-frequency random oscillations
 - `--wave`:  Wavelet function name
@@ -71,7 +70,7 @@ python main.py \
   --alpha 1.0 --eps 16.0 --epochs 30 \
   --mu 1.0 --num_blocks 3\
   --num_copies 5 --th 0.5\
-  --move_max 10 --resize_max 0.4\
+  --resize_max 0.4\
   --rholl 0.1 --wave db3
 ```
 
